@@ -351,6 +351,7 @@ io.on("connection", async (socket) => {
     const to_instead = !to ? data.userID : "data of 'to' is already exists";
     console.log("to: ", to, "to_instead: ", to_instead)
     const from_user = await User.findById(from);
+    const to_user = await User.findById(!to ? to_instead : null);
 
     // find and update call record
     try{
@@ -377,6 +378,10 @@ io.on("connection", async (socket) => {
     }
     // // TODO => emit call_accepted to sender of call
     io.to(from_user?.socket_id).emit("audio_call_accepted", {
+      from,
+      to,
+    });
+    io.to(to_user?.socket_id).emit("audio_call_accepted", {
       from,
       to,
     });
