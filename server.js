@@ -64,7 +64,7 @@ io.on("connection", async (socket) => {
           console.log(err);
         } else {
           console.log(updateUser);
-          console.log(updateUser.socket_id)
+          // console.log(updateUser.socket_id)
         }
       }
       );
